@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from catalog.models import Product, Contact
+from catalog.models import Product
 
 
 def home(request):
@@ -8,7 +8,3 @@ def home(request):
         print(f"{product.name} - {product.price}")
 
     return render(request, 'home.html')
-
-def contacts(request):
-    contacts = Contact.objects.all()
-    return render(request, 'contacts.html', {'contacts': contacts})
