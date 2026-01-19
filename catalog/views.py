@@ -26,22 +26,19 @@ class ProductForm(forms.ModelForm):
             cleaned_data['name'] = name.strip()  # Очистка пробелов
         return cleaned_data
 
-def home(request):
-    """Контроллер для домашней страницы."""
-    # Все продукты O(n), но пагинация ограничивает
-    products_list = Product.objects.all().order_by('-created_at')
-    paginator = Paginator(products_list, 5)  # 5 на страницу, линейная память
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    # Доп: последние 5 в консоль (как раньше)
-    latest_products = Product.objects.order_by('-created_at')[:5]
-    for product in latest_products:
-        print(f"Product: {product.name}, Price: {product.price}")
-    return render(request, 'catalog/home.html', {'page_obj': page_obj})
+from django.views.generic import TemplateView, ListView, DetailView
 
-def contacts(request):
-    """Контроллер для страницы контактов с формой."""
-    # ... (как раньше, с contacts_data)
+class HomeView(TemplateView):
+    template_name = 'catalog/home.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
 
 def product_detail(request, pk):
     """Контроллер для страницы товара."""
