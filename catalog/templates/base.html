@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Каталог{% endblock %}</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        {% include 'catalog/menu.html' %}  <!-- Подшаблон меню -->
+    </header>
+    <main class="container my-4">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2026 Каталог. Все права защищены.</p>
+    </footer>
+</body>
+</html>
